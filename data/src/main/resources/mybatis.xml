@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <properties>
+        <property name="dialect" value="mysql" />
+    </properties>
+    
+    <typeAliases>
+    	<!-- 这样会将com.xxx.model包及其子包下的所有类起别名为相应的简单类名 -->
+        <package name="com.xxx.model"/>
+        <!-- 如果这样去起别名的话，每一个模型类都要写一个，就比较麻烦 -->
+        <!-- <typeAlias alias="Admin" type="com.xxx.model.userManagement.Admin"/> -->
+    </typeAliases>
+</configuration>

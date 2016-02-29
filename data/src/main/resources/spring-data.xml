@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+                           
+    <!-- 注解扫描 -->
+    <context:component-scan base-package="com.xxx" />
+    
+    <!-- 引入数据源，这里变量的读取都是从ssmm0的pom.xml中读取的 -->
+    <bean id="xxxDataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+    
+    <!-- 引入mybatis -->
+    <bean id="xxxSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="xxxDataSource" />
+        <!-- 以下两个属性是专门为xml方式配置的，若只使用注解方式，这两个属性行可以不配置 -->
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="mapperLocations">
+        	<list>
+                <value>classpath*:mapper/admin/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="xxxMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<!-- 
+    		这里就是包名为什么就做com.xxx.mapper.user而非com.xxx.user.mapper,
+    		这样的话，比如说有两个项目com.xxx.mapper.user和com.xxx.mapper.hotel，value只需写作com.xxx.mapper即可
+    		否则，value就要写作com.xxx.user.mapper,com.xxx.hotel.mapper
+    	 -->
+        <property name="basePackage" value="com.xxx.mapper" />
+        <property name="sqlSessionFactoryBeanName" value="xxxSqlSessionFactory" />
+    </bean>
+    
+</beans>

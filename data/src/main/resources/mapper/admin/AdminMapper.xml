@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指定工作空间，要与接口名相同，源代码没有去看，猜测应该是通过"这里的namespace.下边方法的id"来定位方法的 -->
+<mapper namespace="com.xxx.mapper.userManagement.AdminMapper">
+	<!-- 指定字段映射 -->
+	<resultMap type="Admin" id="adminResultMap">
+        <id property="id"  column="id" jdbcType="INTEGER" />
+        <result property="username" column="username" jdbcType="VARCHAR" />
+        <result property="password" column="password" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <select id="getAdminByConditions" resultMap="adminResultMap"><!-- 返回结果为上边指定的adminResultMap -->
+        <![CDATA[ SELECT * FROM userinfo WHERE 1=1 ]]>
+        <if test="username != null"><![CDATA[ AND username = #{username} ]]></if>
+        <if test="password != null"><![CDATA[ AND password = #{password} ]]></if>
+        <![CDATA[ ORDER BY id ASC LIMIT #{start}, #{limit} ]]>
+    </select>
+    
+    <!-- 若不需要自动返回主键，将useGeneratedKeys="true" keyProperty="id"去掉即可 -->
+    <insert id="insertAdminWithBackId" parameterType="Admin" useGeneratedKeys="true" keyProperty="id">
+       <![CDATA[
+       INSERT INTO userinfo 
+       (
+           username,
+           password
+       )
+       VALUES
+       (
+           #{username, jdbcType=VARCHAR},
+           #{password, jdbcType=VARCHAR}
+       )
+       ]]>
+   </insert>
+    
+</mapper>
