@@ -16,9 +16,17 @@
 
 	<name>ssmm0-common</name>
 	<packaging>jar</packaging>
-
-	<!-- 引入实际依赖 -->
+	
 	<dependencies>
-		
+	<!-- bc-加密 -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+		</dependency>
+		<!-- cc加密 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
 	</dependencies>
 </project>

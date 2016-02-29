@@ -24,6 +24,7 @@ import com.xxx.util.PropUtil;
  * activemq p2p 工具类 
  */
 public class ActiveMQP2PUtil {
+	
 	private static final String RPC_CONFIG_FILE = "rpc_config.properties";
 	private static String queueURL;		//队列所在的URL
 	private static String queueName;	//队列名称

@@ -13,11 +13,4 @@
     
     <!-- 这里需要引入ssmm0-data项目中配置的spring-data.xml(之前不引也可以成功，忘记怎么配置的了) -->
     <import resource="classpath:spring-data.xml"/>
-    
-    <!-- 配置fastjson转换器 -->
-    <mvc:annotation-driven>
-        <mvc:message-converters register-defaults="true">
-            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"></bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
 </beans>

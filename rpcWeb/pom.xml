@@ -25,7 +25,7 @@
             <artifactId>ssmm0-data</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!-- spring mvc -->
+        <!-- spring mvc(如果没有web.xml中的CharacterEncodingFilter找不到) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
